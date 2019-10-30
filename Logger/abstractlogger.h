@@ -14,26 +14,19 @@ class AbstractLogger : public QObject
 public:
     const static QString TIMESTAMP_DEFAULT_FORMAT;
 
-    explicit AbstractLogger(QString filePath, QObject *parent = nullptr);
-    explicit AbstractLogger(QString host, quint16 port, QObject *parent = nullptr);
-    explicit AbstractLogger(QString comPort, qint32 baud, QObject *parent = nullptr);
-    virtual ~AbstractLogger();
-    void setMaxQueueSize(quint16 size);
+    explicit AbstractLogger(QObject *parent = nullptr);
+    ~AbstractLogger();
     void setTimestampFormat(QString format);
-    void start();
-    void stop();
+    virtual void start();
+    virtual void stop();
+    bool isOn();
 
 private:
+
+
+protected:
+    bool enabled = false;
     bool cryptoEnabled;
-    QString filePath;
-    QString socketHost;
-    quint16 socketPort;
-    QString comPort;
-    qint32 comBaud;
-    QFile *file;
-    QIODevice *device;
-    QString errorString;
-    quint16 queueSize;
     QString timestampFormat;
 
 signals:
@@ -41,12 +34,8 @@ signals:
 
 
 public slots:
-    void write(QString str);
-    void write(QByteArray array);
+    virtual void write(QByteArray byteArray) = 0;
 
-signals:
-
-public slots:
 };
 
 #endif // ABSTRACTLOGGER_H
