@@ -19,10 +19,6 @@ bool AbstractLogger::isOn() {
     return enabled;
 }
 
-void AbstractLogger::start() {
-    enabled = true;
-}
-
-void AbstractLogger::stop() {
-    enabled = false;
+void AbstractLogger::setEnabled(bool state) {
+    enabled = state;
 }

@@ -10,20 +10,17 @@ FileLogger::FileLogger(QString filePath, QObject *parent) : AbstractLogger(paren
 
 FileLogger::~FileLogger() {
     stop();
-    if(file != nullptr) {
-        file->deleteLater();
-        file = nullptr;
-    }
+    file->deleteLater();
     qDebug() << "[FileLogger]" << "Desctructor";
 }
 
 void FileLogger::start() {
     if(file->isOpen()) {
-        AbstractLogger::enabled = true;
+        setEnabled(true);
     } else {
         if(file->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
-            AbstractLogger::enabled = true;
-            qDebug() << "[FileLogger] Successfully started!";
+            setEnabled(true);
+            qDebug() << QString("[FileLogger] Successfully started! Log file: %1").arg(filePath);
         } else {
             QString error = QString("[FileLogger] Can't open file \"%1\"").arg(filePath);
             emit errorOccuredSignal(error);
@@ -35,7 +32,7 @@ void FileLogger::stop() {
     if(file->isOpen()) {
         file->close();
     }
-    AbstractLogger::enabled = false;
+    setEnabled(false);
 }
 
 // SLOTS
