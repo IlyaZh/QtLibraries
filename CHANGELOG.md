@@ -1,11 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## Released
+### 2019-11-01 - Logger [1.0.0] 
+[EXAMPLE](https://github.com/IlyaZh/QtLibraries/tree/master/Logger/README.md)
+[CHANGELOG](https://github.com/IlyaZh/QtLibraries/tree/master/Logger/CHANGELOG.md)
 
-## 2019-11-01
-### Logger [1.0.0] 
-- Initial commit
 
 ### Udp Console [1.0.0]
- - Initial commit
+[EXAMPLE](https://github.com/IlyaZh/QtLibraries/tree/master/UdpConsole/README.md)
+[CHANGELOG](https://github.com/IlyaZh/QtLibraries/tree/master/UdpConsole/CHANGELOG.md)
