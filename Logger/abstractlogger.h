@@ -17,8 +17,8 @@ public:
     explicit AbstractLogger(QObject *parent = nullptr);
     ~AbstractLogger();
     void setTimestampFormat(QString format);
-    virtual void start();
-    virtual void stop();
+    virtual void start() = 0;
+    virtual void stop() = 0;
     bool isOn();
 
 private:
@@ -28,6 +28,7 @@ protected:
     bool enabled = false;
     bool cryptoEnabled;
     QString timestampFormat;
+    void setEnabled(bool state);
 
 signals:
     void errorOccuredSignal(QString);

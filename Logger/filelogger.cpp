@@ -16,10 +16,10 @@ FileLogger::~FileLogger() {
 
 void FileLogger::start() {
     if(file->isOpen()) {
-        AbstractLogger::enabled = true;
+        setEnabled(true);
     } else {
         if(file->open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
-            AbstractLogger::enabled = true;
+            setEnabled(true);
             qDebug() << QString("[FileLogger] Successfully started! Log file: %1").arg(filePath);
         } else {
             QString error = QString("[FileLogger] Can't open file \"%1\"").arg(filePath);
@@ -32,7 +32,7 @@ void FileLogger::stop() {
     if(file->isOpen()) {
         file->close();
     }
-    AbstractLogger::enabled = false;
+    setEnabled(false);
 }
 
 // SLOTS

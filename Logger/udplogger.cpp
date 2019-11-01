@@ -20,7 +20,7 @@ UdpLogger::~UdpLogger() {
 }
 
 void UdpLogger::start() {
-    AbstractLogger::enabled = true;
+    setEnabled(true);
     qDebug() << QString("[UdpLogger] Successfully started! %1 : %2").arg(address.toString()).arg(port);
 }
 
@@ -28,7 +28,7 @@ void UdpLogger::stop() {
     if(udp->isOpen()) {
         udp->close();
     }
-    AbstractLogger::enabled = false;
+    setEnabled(false);
 }
 
 // slot

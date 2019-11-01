@@ -5,28 +5,20 @@
 #include "filelogger.h"
 #include "udplogger.h"
 
-#include <QTimer>
-#include <QObject>
-#include <QDateTime>
-
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    AbstractLogger* logger = new UdpLogger(12345);
-    logger->write("Hello!");
+    AbstractLogger* udpLogger = new UdpLogger(12345);
+    AbstractLogger* fileLogger = new FileLogger("log.txt");
+    AbstractLogger* serialLogger = new SerialLogger("COM1", 921600);
 
-    int i =0;
+    udpLogger->write("Hello, udp!");
+    fileLogger->write("Hello, txt!");
+    serialLogger->write("Hi, serial!");
 
-//    logger->deleteLater();
-    QTimer *tmr = new QTimer();
-    tmr->setSingleShot(false);
-    tmr->connect(tmr, &QTimer::timeout, [&]{
-        QByteArray msg = QString::number(i++).toUtf8();
-        logger->write(msg);
-        qDebug() << msg;
-    });
-    tmr->start(1000);
-
+    udpLogger->deleteLater();
+    fileLogger->deleteLater();
+    serialLogger->deleteLater();
 
     return a.exec();
 }
